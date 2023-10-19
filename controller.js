@@ -37,8 +37,17 @@ class LibroController {
 
     async add(req, res) {
         const libro = req.body;
-        const [result] = await pool.query(`INSERT INTO Libros(nombre, autor, categoria, ano_publicacion, ISBN) VALUES (?, ?, ?, ?, ?)`, [libro.nombre, libro.autor, libro.categoria, libro.ano_publicacion, libro.ISBN]);
-        res.json({ "id insertado": result.insertId });
+
+        try {
+            const [result] = await pool.query(`INSERT INTO Libros(nombre, autor, categoria, ano_publicacion, ISBN) VALUES (?, ?, ?, ?, ?)`, [libro.nombre, libro.autor, libro.categoria, libro.ano_publicacion, libro.ISBN]);
+            res.json({ "id insertado": result.insertId });
+
+        } catch (err) {
+            console.log(err);
+            const Error = 'Atributo inexistente, verificar el modelo de datos';
+            res.status(400).json({ Error });
+        }
+
     }
 
     /* Actividad 1 Punto B */
