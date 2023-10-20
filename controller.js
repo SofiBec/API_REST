@@ -61,9 +61,9 @@ class LibroController {
             
         
         } catch (err) {
-                console.log(err);
-                const Error = 'Libro inexistente, verificar los datos ingresados';
-                res.status(400).json({ Error });
+             console.log(err);
+             const Error = 'Libro inexistente, verificar los datos ingresados';
+             res.status(400).json({ Error });
             
             }
         }
@@ -73,8 +73,17 @@ class LibroController {
 
     async delete(req, res) {
         const libro = req.body;
-        const [result] = await pool.query(`DELETE FROM Libros WHERE ISBN=(?)`, [libro.ISBN]);
-        res.json({ "Registros eliminados": result.affectedRows });
+
+        try {
+            const [result] = await pool.query(`DELETE FROM Libros WHERE ISBN=(?)`, [libro.ISBN]);
+            res.json({ "Registros eliminados": result.affectedRows });
+
+        } catch (err) {
+            console.log(err);
+            const Error = 'Libro inexistente, verificar los datos ingresados';
+            res.status(400).json({ Error });
+
+        }
     }
 
 }
