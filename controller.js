@@ -2,7 +2,7 @@ import {pool} from './database.js';
 
 class LibroController {
 
-    /* async getAll(req, res) {
+    async getAll(req, res) {
         const [result] = await pool.query('SELECT * FROM libros');
         res.json(result);
     }
@@ -13,7 +13,7 @@ class LibroController {
         res.json(result);
     }
 
-   async add(req, res) {
+   /* async add(req, res) {
         const libro = req.body;
         const [result] = await pool.query(`INSERT INTO Libros(nombre, autor, categoria, ano_publicacion, ISBN) VALUES (?, ?, ?, ?, ?)`, [libro.nombre, libro.autor, libro.categoria, libro.ano_publicacion, libro.ISBN]);
         res.json({ "id insertado": result.insertId });
